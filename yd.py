@@ -1,5 +1,6 @@
 import requests
 
+
 class YD:
 
     def __init__(self, token):
@@ -18,11 +19,10 @@ class YD:
         }
         params = {"path": ydisk_folder_path}
         response = requests.put(url=url, headers=headers, params=params)
-        if response.status_code < 200 and response.status_code > 300:
-            return f'Ошибка YD {response.status_code}'
+        if response.status_code != 201:
+            exit(f'Ошибка YD {response.status_code}')
 
-
-    def get_upload_link(self, ydisk_file_path, url):
+    def upload_photo(self, ydisk_file_path, url):
         """
         Загружает файл на яндекс диск по ссылке.
         :param ydisk_file_path: расположение и имя файла на яндекс диске
@@ -36,6 +36,6 @@ class YD:
         }
         params = {"path": ydisk_file_path, 'url': url}
         response = requests.post(url=upload_url, headers=headers, params=params)
-        if response.status_code < 200 and response.status_code > 300:
-            return f'Ошибка YD {response.status_code}'
-
+        if response.status_code != 202:
+            exit(f'Ошибка YD {response.status_code}')
+        return response.status_code
