@@ -74,8 +74,3 @@ class VK:
                 likes_count = likes_count + '_' + date
             photos[likes_count] = {'url': url, 'size': size}
         return photos
-
-
-
-
-

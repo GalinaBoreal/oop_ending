@@ -2,6 +2,7 @@ import requests
 from tqdm import tqdm
 import json
 
+
 class YD:
 
     def __init__(self, token):
@@ -9,8 +10,8 @@ class YD:
 
     def get_folder(self, ydisk_folder_path):
         """
-        Создает папку на яндекс диске.
-        :param ydisk_folder_path: расположение и имя папки
+        Создает папку на яндекс диске методом put.
+        :param: ydisk_folder_path: расположение и имя папки
         :return: в случае ошибки - код ошибки
         """
         url = "https://cloud-api.yandex.net/v1/disk/resources"
@@ -25,9 +26,12 @@ class YD:
 
     def upload_photo(self, data, ydisk_folder_path="Photos_vk"):
         """
-        Загружает файл на яндекс диск по ссылке.
-        :param ydisk_file_path: расположение и имя файла на яндекс диске
-        :param url: ссылка на файл
+        Вызывает get_folder(), имя папки: Photos_vk.
+        Загружает файл на яндекс диск методом post,
+        используя данные метода VK.get_correct_photos().
+        Процесс загрузки сопровождается прогресс баром tqdm.
+        Формирует файл photos.json.
+        :param: params содержит расположение и имя файла и ссылку на файл
         :return: в случае ошибки - код ошибки
         """
         self.get_folder(ydisk_folder_path)
